@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2F5D120028115A3600DABA7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D11FF28115A3600DABA7B /* AppDelegate.swift */; };
-		2F5D120428115A3600DABA7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D120328115A3600DABA7B /* ViewController.swift */; };
+		2F5D120428115A3600DABA7B /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D120328115A3600DABA7B /* RepositoryViewController.swift */; };
 		2F5D120928115A3700DABA7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D120828115A3700DABA7B /* Assets.xcassets */; };
 		2F5D120C28115A3700DABA7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F5D120A28115A3700DABA7B /* LaunchScreen.storyboard */; };
+		2F5D12142811702000DABA7B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D12132811702000DABA7B /* BaseViewController.swift */; };
 		C97A81AB5D280724E31163CF /* Pods_GithubSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F5554EC129AF4D0A6C7502 /* Pods_GithubSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -18,10 +19,11 @@
 		12F5554EC129AF4D0A6C7502 /* Pods_GithubSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5D11FC28115A3600DABA7B /* GithubSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F5D11FF28115A3600DABA7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2F5D120328115A3600DABA7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2F5D120328115A3600DABA7B /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		2F5D120828115A3700DABA7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F5D120B28115A3700DABA7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F5D120D28115A3700DABA7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F5D12132811702000DABA7B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B913F93F94D1AC5125CE1756 /* Pods-GithubSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		C5AD6C22810916ACAA65521F /* Pods-GithubSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.release.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,13 +61,62 @@
 		2F5D11FE28115A3600DABA7B /* GithubSearch */ = {
 			isa = PBXGroup;
 			children = (
-				2F5D11FF28115A3600DABA7B /* AppDelegate.swift */,
-				2F5D120328115A3600DABA7B /* ViewController.swift */,
-				2F5D120828115A3700DABA7B /* Assets.xcassets */,
-				2F5D120A28115A3700DABA7B /* LaunchScreen.storyboard */,
-				2F5D120D28115A3700DABA7B /* Info.plist */,
+				2F5D12192811710400DABA7B /* Resouce */,
+				2F5D1218281170F800DABA7B /* Source */,
+				2F5D121A2811713D00DABA7B /* Support */,
 			);
 			path = GithubSearch;
+			sourceTree = "<group>";
+		};
+		2F5D1215281170D100DABA7B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D1216281170E600DABA7B /* Common */,
+				2F5D1217281170EE00DABA7B /* Repository */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		2F5D1216281170E600DABA7B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D12132811702000DABA7B /* BaseViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2F5D1217281170EE00DABA7B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D120328115A3600DABA7B /* RepositoryViewController.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		2F5D1218281170F800DABA7B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D11FF28115A3600DABA7B /* AppDelegate.swift */,
+				2F5D1215281170D100DABA7B /* Scene */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		2F5D12192811710400DABA7B /* Resouce */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D120A28115A3700DABA7B /* LaunchScreen.storyboard */,
+				2F5D120828115A3700DABA7B /* Assets.xcassets */,
+			);
+			path = Resouce;
+			sourceTree = "<group>";
+		};
+		2F5D121A2811713D00DABA7B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				2F5D120D28115A3700DABA7B /* Info.plist */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		7B9DD2226F5878B9BF061D1E /* Frameworks */ = {
@@ -199,8 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F5D120428115A3600DABA7B /* ViewController.swift in Sources */,
+				2F5D120428115A3600DABA7B /* RepositoryViewController.swift in Sources */,
 				2F5D120028115A3600DABA7B /* AppDelegate.swift in Sources */,
+				2F5D12142811702000DABA7B /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GithubSearch/Info.plist;
+				INFOPLIST_FILE = GithubSearch/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -352,7 +404,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wotjd.GithubSearch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wotjd.GithubSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -370,7 +422,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GithubSearch/Info.plist;
+				INFOPLIST_FILE = GithubSearch/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -380,7 +432,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wotjd.GithubSearch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wotjd.GithubSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

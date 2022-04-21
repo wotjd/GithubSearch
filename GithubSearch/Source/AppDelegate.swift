@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import SnapKit
+import Reusable
+import RxSwift
+import RxCocoa
+import ReactorKit
+import Moya
+import Then
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow()
     defer { self.window = window }
     
-    window.rootViewController = ViewController()
+    window.rootViewController = RepositoryViewController()
     window.makeKeyAndVisible()
     
     return true
