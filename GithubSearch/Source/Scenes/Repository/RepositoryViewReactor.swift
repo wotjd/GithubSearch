@@ -7,6 +7,7 @@
 
 import RxSwift
 import ReactorKit
+import Moya
 
 final class RepositoryViewReactor: Reactor {
   enum Action {
@@ -34,6 +35,8 @@ final class RepositoryViewReactor: Reactor {
   }
   
   let initialState = State()
+  
+//  private let provider = MoyaProvider<GithubAPI>
   
   func mutate(action: Action) -> Observable<Mutation> {
     switch action {
