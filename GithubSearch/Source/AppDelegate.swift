@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import SnapKit
+import Reusable
+import RxSwift
+import RxCocoa
+import ReactorKit
+import Moya
+import Then
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow()
     defer { self.window = window }
     
-    window.rootViewController = ViewController()
+    window.rootViewController = UINavigationController(
+      rootViewController: RepositoryViewController().then {
+        $0.reactor = .init()
+      }
+    ).then {
+      $0.navigationBar.prefersLargeTitles = true
+    }
     window.makeKeyAndVisible()
     
     return true

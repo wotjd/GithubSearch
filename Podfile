@@ -18,8 +18,17 @@ target 'GithubSearch' do
   pod 'ReactorKit'
   
   # Networking
-  pod 'Moya/RxSwift'
+  pod 'Moya/RxSwift', '~> 15.0'
   
   # Utils
   pod 'Then'
+end
+
+# resolve compiler warning
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+    end
+  end
 end
