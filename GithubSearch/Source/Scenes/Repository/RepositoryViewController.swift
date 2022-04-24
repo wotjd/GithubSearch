@@ -15,7 +15,9 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
   private enum Text {
     static let navigationBarTitleText = "Github Search"
     static let searchBarPlaceholderText = "Search Repository"
-    static let placeholderText = "No repository found"
+    static let loadingText = "Seaching...🔍"
+    static let errorText = "Oops, an error ocurred.\nPlease retry 😢"
+    static let placeholderText = "No repository found 🙄"
   }
   private enum Color {
     static let backgroundColor = UIColor.systemBackground
@@ -27,8 +29,8 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
     $0.separatorInset = .init(all: 10)
     $0.register(cellType: RepositoryCell.self)
   }
-  private let searchBar = UISearchBar().then {
-    $0.placeholder = Text.searchBarPlaceholderText
+  private let searchController = UISearchController(searchResultsController: nil).then {
+    $0.searchBar.placeholder = Text.searchBarPlaceholderText
   }
   private let placeholderView = UIView().then {
     $0.backgroundColor = Color.backgroundColor
@@ -36,19 +38,21 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
   }
   private let placeholderLabel = UILabel().then {
     $0.font = .preferredFont(forTextStyle: .body)
-    $0.text = Text.placeholderText
     $0.textColor = Color.labelColor
-    $0.numberOfLines = 1
-    $0.adjustsFontSizeToFitWidth = false
+    $0.numberOfLines = 0
   }
+  
+  private var searchBar: UISearchBar { self.searchController.searchBar }
   
   // MARK: Layout
   override func configureLayout() {
     self.view.backgroundColor = Color.backgroundColor
-    self.navigationController?.navigationBar.topItem?.title = Text.navigationBarTitleText
-    self.tableView.tableHeaderView = self.searchBar
-    
-    self.searchBar.sizeToFit()
+    if let navigationController = self.navigationController {
+      navigationController.navigationBar.prefersLargeTitles = true
+      navigationController.navigationBar.topItem?.title = Text.navigationBarTitleText
+      self.navigationItem.searchController = self.searchController
+      self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
     
     self.view.addSubviews(
       self.tableView,
@@ -75,6 +79,7 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
         $0.deselectRow(at: $1, animated: true)
       }
       .withLatestFrom(reactor.state.map(\.repositories)) { $1[$0.item] }
+      .observe(on: MainScheduler.asyncInstance)
       .bind(with: self) { ss, repository in
         guard let url = URL(string: repository.urlString) else { return }
         ss.navigationController?.pushViewController(
@@ -86,15 +91,30 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
       }
       .disposed(by: self.disposeBag)
     
-    self.searchBar.rx.text
-      .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
-      .map(Reactor.Action.search(text:))
+    Observable
+      .merge(
+        self.searchBar.rx.text
+          .distinctUntilChanged()
+          .map(Reactor.Action.search(text:))
+      )
+      .throttle(.milliseconds(300), scheduler: MainScheduler.asyncInstance)
       .bind(to: reactor.action)
       .disposed(by: self.disposeBag)
     
-    // TODO: load more
+    self.tableView.rx.reachedBottom(margin: 100)
+      .throttle(.milliseconds(300), scheduler: MainScheduler.asyncInstance)
+      .map { Reactor.Action.loadMore }
+      .bind(to: reactor.action)
+      .disposed(by: self.disposeBag)
     
-    reactor.state.map(\.hasRepository)
+    
+    reactor.state.distinctUntilChanged(\.isLoading, \.hasError, \.hasNoRepository)
+      .map { $0.isLoading ? Text.loadingText : $0.hasError ? Text.errorText : Text.placeholderText }
+      .observe(on: MainScheduler.asyncInstance)
+      .bind(to: self.placeholderLabel.rx.text)
+      .disposed(by: self.disposeBag)
+    
+    reactor.state.map(\.shouldShowPlaceholder.toggled)
       .distinctUntilChanged()
       .observe(on: MainScheduler.asyncInstance)
       .bind(to: self.placeholderView.rx.isHidden)

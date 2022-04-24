@@ -13,8 +13,19 @@ final class RepositoryCell: UITableViewCell, Reusable {
   private enum Metric {
     static let stackViewInset = UIEdgeInsets(all: 10)
   }
+  private enum Material {
+    static let dateFormatter = RelativeDateTimeFormatter().then {
+      $0.unitsStyle = .full
+    }
+  }
   private enum Text {
-    static let starsText: (Int) -> String = { "\($0) stars" }
+    static let starsText: (Int) -> String = { "⭐️ Stars: \($0)" }
+    static let languageText: (String) -> String = { "🔤 Language: \($0)" }
+    static let licenseText: (String) -> String = { "📄 License: \($0)" }
+    static let dateText: (Date) -> String = {
+      let dateStirng = Material.dateFormatter.localizedString(for: $0, relativeTo: Date())
+      return "⏰ Updated: \(dateStirng)"
+    }
   }
   
   private let stackView = UIStackView().then {
@@ -80,9 +91,15 @@ final class RepositoryCell: UITableViewCell, Reusable {
   
   func prepare(_ repository: Repository) {
     self.titleLabel.text = repository.title
-    self.descLabel.text = repository.desc
+    self.descLabel.text = repository.description
     self.starsLabel.text = Text.starsText(repository.starsCount)
-    self.languageLabel.text = repository.language
-    self.licenseLabel.text = repository.license
+    self.languageLabel.text = repository.language.map(Text.languageText)
+    self.licenseLabel.text = repository.licenseName.map(Text.licenseText)
+    self.updateTimeLabel.text = Text.dateText(repository.updatedTime)
+    
+    self.stackView.arrangedSubviews.forEach {
+      guard let label = $0 as? UILabel else { return }
+      $0.isHidden = label.text?.isEmpty ?? true
+    }
   }
 }

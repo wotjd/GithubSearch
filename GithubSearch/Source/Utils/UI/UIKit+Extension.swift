@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIEdgeInsets {
+  var vertical: CGFloat { self.top + self.bottom }
+  
   init(all inset: CGFloat) {
     self.init(top: inset, left: inset, bottom: inset, right: inset)
   }
