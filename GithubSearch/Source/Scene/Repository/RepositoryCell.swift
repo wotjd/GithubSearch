@@ -11,32 +11,41 @@ import Reusable
 final class RepositoryCell: UITableViewCell, Reusable {
   // MARK: Constant
   private enum Metric {
-    
+    static let stackViewInset = UIEdgeInsets(all: 10)
+  }
+  private enum Text {
+    static let starsText: (Int) -> String = { "\($0) stars" }
   }
   
-  let stackView = UIStackView().then {
+  private let stackView = UIStackView().then {
     $0.axis = .vertical
     $0.alignment = .fill
     $0.distribution = .equalSpacing
-    $0.spacing = 8
+    $0.spacing = 6
     $0.translatesAutoresizingMaskIntoConstraints = false
   }
-  let titleLabel = UILabel().then {
+  private let titleLabel = UILabel().then {
+    $0.font = .preferredFont(forTextStyle: .headline)
     $0.adjustsFontSizeToFitWidth = true
   }
-  let descLabel = UILabel().then {
+  private let descLabel = UILabel().then {
+    $0.font = .preferredFont(forTextStyle: .subheadline)
+    $0.numberOfLines = 0
+  }
+  private let starsLabel = UILabel().then {
+    $0.font = .preferredFont(forTextStyle: .caption1)
     $0.adjustsFontSizeToFitWidth = true
   }
-  let starsLabel = UILabel().then {
+  private let languageLabel = UILabel().then {
+    $0.font = .preferredFont(forTextStyle: .caption1)
     $0.adjustsFontSizeToFitWidth = true
   }
-  let languageLabel = UILabel().then {
+  private let licenseLabel = UILabel().then {
+    $0.font = .preferredFont(forTextStyle: .caption1)
     $0.adjustsFontSizeToFitWidth = true
   }
-  let licenseLabel = UILabel().then {
-    $0.adjustsFontSizeToFitWidth = true
-  }
-  let updateTimeLabel = UILabel().then {
+  private let updateTimeLabel = UILabel().then {
+    $0.font = .preferredFont(forTextStyle: .caption1)
     $0.adjustsFontSizeToFitWidth = true
   }
   
@@ -54,7 +63,11 @@ final class RepositoryCell: UITableViewCell, Reusable {
       self.updateTimeLabel
     )
     
-    self.stackView.setCustomSpacing(4, after: self.descLabel)
+    self.stackView.setCustomSpacing(3, after: self.starsLabel)
+    
+    self.stackView.snp.makeConstraints {
+      $0.edges.equalToSuperview().inset(Metric.stackViewInset)
+    }
   }
   @available(*, unavailable)
   required init?(coder: NSCoder) {
@@ -68,7 +81,7 @@ final class RepositoryCell: UITableViewCell, Reusable {
   func prepare(_ repository: Repository) {
     self.titleLabel.text = repository.title
     self.descLabel.text = repository.desc
-    self.starsLabel.text = "\(repository.starsCount)"
+    self.starsLabel.text = Text.starsText(repository.starsCount)
     self.languageLabel.text = repository.language
     self.licenseLabel.text = repository.license
   }

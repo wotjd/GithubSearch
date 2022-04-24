@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 import ReactorKit
 import RxCocoa
 
@@ -23,6 +24,7 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
   
   // MARK: UI
   private let tableView = UITableView().then {
+    $0.separatorInset = .init(all: 10)
     $0.register(cellType: RepositoryCell.self)
   }
   private let searchBar = UISearchBar().then {
@@ -68,6 +70,22 @@ final class RepositoryViewController: BaseViewController, ReactorKit.View {
   
   // MARK: Bind
   func bind(reactor: RepositoryViewReactor) {
+    self.tableView.rx.itemSelected
+      .doOnNext(with: self.tableView) {
+        $0.deselectRow(at: $1, animated: true)
+      }
+      .withLatestFrom(reactor.state.map(\.repositories)) { $1[$0.item] }
+      .bind(with: self) { ss, repository in
+        guard let url = URL(string: repository.urlString) else { return }
+        ss.navigationController?.pushViewController(
+          SFSafariViewController(url: url).then {
+            $0.navigationItem.largeTitleDisplayMode = .never
+          },
+          animated: true
+        )
+      }
+      .disposed(by: self.disposeBag)
+    
     self.searchBar.rx.text
       .throttle(.milliseconds(500), scheduler: MainScheduler.asyncInstance)
       .map(Reactor.Action.search(text:))
