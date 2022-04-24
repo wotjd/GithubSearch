@@ -29,9 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       rootViewController: RepositoryViewController().then {
         $0.reactor = .init()
       }
-    ).then {
-      $0.navigationBar.prefersLargeTitles = true
-    }
+    )
     window.makeKeyAndVisible()
     
     return true

@@ -21,7 +21,9 @@
 		2FFE92182815411A00CB5E5B /* RxOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE92172815411A00CB5E5B /* RxOperators.swift */; };
 		2FFE921B28154E2400CB5E5B /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE921A28154E2400CB5E5B /* GithubAPI.swift */; };
 		2FFE921E281556D800CB5E5B /* RepositorySortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE921D281556D800CB5E5B /* RepositorySortOption.swift */; };
+		2FFE92222815812000CB5E5B /* Then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE92212815812000CB5E5B /* Then.swift */; };
 		2FFE9224281593B500CB5E5B /* PaginatedResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE9223281593B500CB5E5B /* PaginatedResults.swift */; };
+		2FFE922A2815B01000CB5E5B /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFE92292815B01000CB5E5B /* UIScrollView+Rx.swift */; };
 		C97A81AB5D280724E31163CF /* Pods_GithubSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F5554EC129AF4D0A6C7502 /* Pods_GithubSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +45,9 @@
 		2FFE92172815411A00CB5E5B /* RxOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxOperators.swift; sourceTree = "<group>"; };
 		2FFE921A28154E2400CB5E5B /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
 		2FFE921D281556D800CB5E5B /* RepositorySortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySortOption.swift; sourceTree = "<group>"; };
+		2FFE92212815812000CB5E5B /* Then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Then.swift; sourceTree = "<group>"; };
 		2FFE9223281593B500CB5E5B /* PaginatedResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedResults.swift; sourceTree = "<group>"; };
+		2FFE92292815B01000CB5E5B /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		B913F93F94D1AC5125CE1756 /* Pods-GithubSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.debug.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		C5AD6C22810916ACAA65521F /* Pods-GithubSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSearch.release.xcconfig"; path = "Target Support Files/Pods-GithubSearch/Pods-GithubSearch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +154,7 @@
 				2FFE9216281540DB00CB5E5B /* Rx */,
 				2FFE92102811CDF000CB5E5B /* Primitive */,
 				2F5D121C2811732B00DABA7B /* UI */,
+				2FFE92212815812000CB5E5B /* Then.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				2FFE92172815411A00CB5E5B /* RxOperators.swift */,
+				2FFE92292815B01000CB5E5B /* UIScrollView+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -348,10 +354,12 @@
 				2F5D120428115A3600DABA7B /* RepositoryViewController.swift in Sources */,
 				2F5D120028115A3600DABA7B /* AppDelegate.swift in Sources */,
 				2FFE92122811CE0200CB5E5B /* Bool+Extension.swift in Sources */,
+				2FFE922A2815B01000CB5E5B /* UIScrollView+Rx.swift in Sources */,
 				2FFE9224281593B500CB5E5B /* PaginatedResults.swift in Sources */,
 				2FFE920C2811C23E00CB5E5B /* RepositoryViewReactor.swift in Sources */,
 				2F5D121E2811733700DABA7B /* UIView+Extension.swift in Sources */,
 				2FFE921E281556D800CB5E5B /* RepositorySortOption.swift in Sources */,
+				2FFE92222815812000CB5E5B /* Then.swift in Sources */,
 				2FFE920E2811C2AB00CB5E5B /* Repository.swift in Sources */,
 				2FFE921428153BA600CB5E5B /* UIKit+Extension.swift in Sources */,
 				2F5D12142811702000DABA7B /* BaseViewController.swift in Sources */,
