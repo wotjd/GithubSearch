@@ -102,3 +102,4 @@ node_modules
 .DS_Store
 *.log
 *.profraw
+actions-runner
