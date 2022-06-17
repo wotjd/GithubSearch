@@ -41,6 +41,10 @@ let target = Target(
   sources: ["GithubSearch/Source/**"],
   resources: ["GithubSearch/Resource/**"],
   scripts: scripts,
+  dependencies: [
+    .external(name: "FacebookCore"),
+    .external(name: "FacebookLogin")
+  ],
   settings: settings
 )
 
